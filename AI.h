@@ -209,7 +209,6 @@ void runAIAttack()
            else if (screenVar::t6 == 0) { screenVar::t6 = 2; }
            else if (screenVar::t8 == 0) { screenVar::t8 = 2; }
            else if (screenVar::t4 == 0) { screenVar::t4 = 2; }
-           else if (screenVar::t5 == 0) { screenVar::t5 = 2; }
-           else { return 0; }        
+           else if (screenVar::t5 == 0) { screenVar::t5 = 2; }     
      }
 }

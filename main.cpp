@@ -1,18 +1,25 @@
 /*
-  David Wartenbe
-  12/24/13
-  Tic-Tac-Toe
-  C++
-  
-  Game Board:
-       t1 t2 t3
-       t4 t5 t6
-       t7 t8 t9
-  0 = Open
-  1 = Player
-  2 = Computer
-  
-  VERSION_0.8 Beta
+    Copyright (C) 2014  David Wartenbe
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    
+    
+    
+    Tic-tac-toe
+    
+    This is more of a learning experiance than and actual game.
+    Enjoy!
 */
 
 #include <iostream>
@@ -174,7 +181,10 @@ void checkInRange()
 
 int main()
 {
-    cout << "David Wartenbe\nTic-Tac-Toe\nWrittin' in C++\n";
+    cout << "tic-tac-toe  Copyright (C) 2014 David Wartenbe\n";
+    cout << "This program comes with ABSOLUTELY NO WARRANTY.\n";
+    cout << "This is free software, and you are welcome to redistribute it\n";
+    cout << "under certain conditions.\n";
     cout << "Game board:\n";
     printScreen();
     
