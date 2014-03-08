@@ -12,19 +12,15 @@
   1 = Player
   2 = Computer
   
-  VERSION_0.5 Beta
+  VERSION_0.8 Beta
 */
 
-#include <cstdlib>
 #include <iostream>
+#include "AI.h"
+#include "checkWin.h"
 
 using namespace std;
 
-//create our table variables
-namespace screenVar
-{
-   int t1, t2, t3, t4, t5, t6, t7, t8, t9;     
-}
 
 namespace input
 {
@@ -41,195 +37,12 @@ void printScreen()
     cout << screenVar::t7 << " " << screenVar::t8 << " " << screenVar::t9 << endl;
 }
 
-bool runAIProtect()
-{
-     //horizontal
-     if (screenVar::t1 == 1 and screenVar::t2 == 1 and screenVar::t3 == 0) { screenVar::t3 = 2;
-     return true; }
-     else if (screenVar::t1 == 1 and screenVar::t3 == 1 and screenVar::t2 == 0) { screenVar::t2 = 2;
-     return true; }
-     else if (screenVar::t2 == 1 and screenVar::t3 == 1 and screenVar::t1 == 0) { screenVar::t1 = 2;
-     return true; }
-     
-     else if (screenVar::t4 == 1 and screenVar::t5 == 1 and screenVar::t6 == 0) { screenVar::t6 = 2;
-     return true; }
-     else if (screenVar::t4 == 1 and screenVar::t6 == 1 and screenVar::t5 == 0) { screenVar::t5 = 2;
-     return true; }
-     else if (screenVar::t5 == 1 and screenVar::t6 == 1 and screenVar::t4 == 0) { screenVar::t4 = 2;
-     return true; }
-     
-     else if (screenVar::t7 == 1 and screenVar::t8 == 1 and screenVar::t9 == 0) { screenVar::t9 = 2;
-     return true; }
-     else if (screenVar::t7 == 1 and screenVar::t9 == 1 and screenVar::t8 == 0) { screenVar::t8 = 2;
-     return true; }
-     else if (screenVar::t8 == 1 and screenVar::t9 == 1 and screenVar::t7 == 0) { screenVar::t7 = 2;
-     return true; }
-     
-     //vertical
-     else if (screenVar::t1 == 1 and screenVar::t4 == 1 and screenVar::t7 == 0) { screenVar::t7 = 2;
-     return true; }
-     else if (screenVar::t1 == 1 and screenVar::t7 == 1 and screenVar::t4 == 0) { screenVar::t4 = 2;
-     return true; }
-     else if (screenVar::t4 == 1 and screenVar::t7 == 1 and screenVar::t1 == 0) { screenVar::t1 = 2;
-     return true; }
-     
-     else if (screenVar::t2 == 1 and screenVar::t5 == 1 and screenVar::t8 == 0) { screenVar::t8 = 2;
-     return true; }
-     else if (screenVar::t2 == 1 and screenVar::t8 == 1 and screenVar::t5 == 0) { screenVar::t5 = 2;
-     return true; }
-     else if (screenVar::t5 == 1 and screenVar::t8 == 1 and screenVar::t2 == 0) { screenVar::t2 = 2;
-     return true; }
-     
-     else if (screenVar::t3 == 1 and screenVar::t6 == 1 and screenVar::t9 == 0) { screenVar::t9 = 2;
-     return true; }
-     else if (screenVar::t3 == 1 and screenVar::t9 == 1 and screenVar::t6 == 0) { screenVar::t6 = 2;
-     return true; }
-     else if (screenVar::t6 == 1 and screenVar::t9 == 1 and screenVar::t3 == 0) { screenVar::t3 = 2;
-     return true; }
-     
-     //diagonal
-     else if (screenVar::t1 == 1 and screenVar::t5 == 1 and screenVar::t9 == 0) { screenVar::t9 = 2;
-     return true; }
-     else if (screenVar::t1 == 1 and screenVar::t9 == 1 and screenVar::t5 == 0) { screenVar::t5 = 2;
-     return true; }
-     else if (screenVar::t5 == 1 and screenVar::t9 == 1 and screenVar::t1 == 0) { screenVar::t1 = 2;
-     return true; }
-     
-     else if (screenVar::t3 == 1 and screenVar::t5 == 1 and screenVar::t7 == 0) { screenVar::t7 = 2;
-     return true; }
-     else if (screenVar::t3 == 1 and screenVar::t7 == 1 and screenVar::t5 == 0) { screenVar::t5 = 2;
-     return true; }
-     else if (screenVar::t5 == 1 and screenVar::t7 == 1 and screenVar::t3 == 0) { screenVar::t3 = 2;
-     return true; }
-     else { return false; }
-}
-
-bool finish()
-{
-     //horizontal
-     if (screenVar::t1 == 2 and screenVar::t2 == 2 and screenVar::t3 == 0) { screenVar::t3 = 2;
-     return true; }
-     else if (screenVar::t1 == 2 and screenVar::t3 == 2 and screenVar::t2 == 0) { screenVar::t2 = 2;
-     return true; }
-     else if (screenVar::t2 == 2 and screenVar::t3 == 2 and screenVar::t1 == 0) { screenVar::t1 = 2;
-     return true; }
-     
-     else if (screenVar::t4 == 1 and screenVar::t5 == 1 and screenVar::t6 == 0) { screenVar::t6 = 2;
-     return true; }
-     else if (screenVar::t5 == 1 and screenVar::t6 == 1 and screenVar::t4 == 0) { screenVar::t4 = 2;
-     return true; }
-     else if (screenVar::t4 == 1 and screenVar::t6 == 1 and screenVar::t5 == 0) { screenVar::t5 = 2;
-     return true; }
-     
-     else if (screenVar::t7 == 1 and screenVar::t8 == 2 and screenVar::t9 == 0) { screenVar::t9 = 2;
-     return true; }
-     else if (screenVar::t7 == 1 and screenVar::t9 == 2 and screenVar::t8 == 0) { screenVar::t8 = 2;
-     return true; }
-     else if (screenVar::t8 == 1 and screenVar::t9 == 2 and screenVar::t7 == 0) { screenVar::t7 = 2;
-     return true; }
-     
-     //vertical
-     else if (screenVar::t1 == 2 and screenVar::t4 == 2 and screenVar::t7 == 0) { screenVar::t7 = 2;
-     return true; }
-     else if (screenVar::t1 == 2 and screenVar::t7 == 2 and screenVar::t4 == 0) { screenVar::t4 = 2;
-     return true; }
-     else if (screenVar::t4 == 2 and screenVar::t7 == 2 and screenVar::t1 == 0) { screenVar::t1 = 2;
-     return true; }
-     
-     else if (screenVar::t2 == 2 and screenVar::t5 == 2 and screenVar::t8 == 0) { screenVar::t8 = 2;
-     return true; }
-     else if (screenVar::t2 == 2 and screenVar::t8 == 2 and screenVar::t5 == 0) { screenVar::t5 = 2;
-     return true; }
-     else if (screenVar::t5 == 2 and screenVar::t8 == 2 and screenVar::t2 == 0) { screenVar::t2 = 2;
-     return true; }
-     
-     else if (screenVar::t3 == 2 and screenVar::t6 == 2 and screenVar::t9 == 0) { screenVar::t9 = 2;
-     return true; }
-     else if (screenVar::t3 == 2 and screenVar::t9 == 2 and screenVar::t6 == 0) { screenVar::t6 = 2;
-     return true; }
-     else if (screenVar::t6 == 2 and screenVar::t9 == 2 and screenVar::t3 == 0) { screenVar::t3 = 2;
-     return true; }
-     
-     
-     //diagonal
-     else if (screenVar::t1 == 2 and screenVar::t5 == 2 and screenVar::t9 == 0) { screenVar::t9 = 2;
-     return true; }
-     else if (screenVar::t1 == 2 and screenVar::t9 == 2 and screenVar::t5 == 0) { screenVar::t5 = 2;
-     return true; }
-     else if (screenVar::t5 == 2 and screenVar::t9 == 2 and screenVar::t1 == 0) { screenVar::t1 = 2;
-     return true; }
-     
-     else if (screenVar::t3 == 2 and screenVar::t5 == 2 and screenVar::t7 == 0) { screenVar::t7 = 2;
-     return true; }
-     else if (screenVar::t3 == 2 and screenVar::t7 == 2 and screenVar::t5 == 0) { screenVar::t5 = 2;
-     return true; }
-     else if (screenVar::t7 == 2 and screenVar::t5 == 2 and screenVar::t3 == 0) { screenVar::t3 = 2;
-     return true; }
-     else { return false; }
-}
-
-void runAIAttack()
-{
-     if (!finish())
-     {
-           if (screenVar::t1 == 0) { screenVar::t1 = 2; }
-           else if (screenVar::t3 == 0) { screenVar::t3 = 2; }
-           else if (screenVar::t9 == 0) { screenVar::t9 = 2; }
-           else if (screenVar::t7 == 0) { screenVar::t7 = 2; }
-         
-           //the win
-           else if (screenVar::t2 == 0) { screenVar::t2 = 2; }
-           else if (screenVar::t6 == 0) { screenVar::t6 = 2; }
-           else if (screenVar::t8 == 0) { screenVar::t8 = 2; }
-           else if (screenVar::t4 == 0) { screenVar::t4 = 2; }
-           else if (screenVar::t5 == 0) { screenVar::t5 = 2; }
-           else { cout << "We don goofed here" << endl; }        
-     }
-}
-
-bool checkWin()
-{
-     //PLAYER
-     //horizontal
-     if (screenVar::t1 == 1 and screenVar::t2 == 1 and screenVar::t3 == 1) { return true; }
-     if (screenVar::t4 == 1 and screenVar::t5 == 1 and screenVar::t6 == 1) { return true; }
-     if (screenVar::t7 == 1 and screenVar::t8 == 2 and screenVar::t9 == 1) { return true; }
-     
-     //vertical
-     if (screenVar::t1 == 1 and screenVar::t4 == 1 and screenVar::t7 == 1) { return true; }
-     if (screenVar::t2 == 1 and screenVar::t5 == 1 and screenVar::t8 == 1) { return true; }
-     if (screenVar::t3 == 1 and screenVar::t6 == 1 and screenVar::t9 == 1) { return true; }
-     
-     //diagonal
-     if (screenVar::t1 == 1 and screenVar::t5 == 1 and screenVar::t9 == 1) { return true; }
-     if (screenVar::t3 == 1 and screenVar::t5 == 1 and screenVar::t7 == 1) { return true; }
-     else { return false; }
-}
-
 bool catsEye()
 {
      if (screenVar::t1 != 0 and screenVar::t2 != 0 and screenVar::t3 != 0 and screenVar::t4 != 0 and screenVar::t5 != 0 and screenVar::t6 != 0 and screenVar::t7 != 0 and screenVar::t8 != 0 and screenVar::t9 != 0)
      {
          return true;
      }else { return false; }     
-}
-
-bool checkWinComp()
-{
-   //COMPUTER
-     if (screenVar::t1 == 2 and screenVar::t2 == 2 and screenVar::t3 == 2) { return true; }
-     if (screenVar::t4 == 2 and screenVar::t5 == 2 and screenVar::t6 == 2) { return true; }
-     if (screenVar::t7 == 2 and screenVar::t8 == 2 and screenVar::t9 == 2) { return true; }
-     
-     //vertical
-     if (screenVar::t1 == 2 and screenVar::t4 == 2 and screenVar::t7 == 2) { return true; }
-     if (screenVar::t2 == 2 and screenVar::t5 == 2 and screenVar::t8 == 2) { return true; }
-     if (screenVar::t3 == 2 and screenVar::t6 == 2 and screenVar::t9 == 2) { return true; }
-     
-     //diagonal
-     if (screenVar::t1 == 2 and screenVar::t5 == 2 and screenVar::t9 == 2) { return true; }
-     if (screenVar::t3 == 2 and screenVar::t5 == 2 and screenVar::t7 == 2) { return true; }
-     else { return false; }      
 }
 
 void squareUnavailable()
@@ -361,11 +174,50 @@ void checkInRange()
 
 int main()
 {
-    cout << "Cpt. Dave's Tic Tac Toe" << endl;
+    cout << "David Wartenbe\nTic-Tac-Toe\nWrittin' in C++\n";
+    cout << "Game board:\n";
+    printScreen();
     
-    //debug? maybe not...
-    for (int i=0; i<9; i++)
+    //Attept to add a 'choose who goes first' mechanic
+    int whoGoesFirst;
+    int rounds;//sets our game lood depending on who goes first
+    cout << "Please choose who goes first(1 = You, 2 = Computer): ";
+    cin >> whoGoesFirst;
+    if (whoGoesFirst > 2 || whoGoesFirst < 1)
     {
+        //user cant follow directions
+        cout << "Error: input out of range, try again: \n";
+        cin >> whoGoesFirst;
+        while (whoGoesFirst != 1 && whoGoesFirst != 2)
+        {
+              cout << "Error: input out of range, try again: \n";
+              cin >> whoGoesFirst;  
+        }  
+              
+    }
+        
+    if (whoGoesFirst == 1) {
+       rounds = 5;
+       //return 0; 
+    }
+    else
+    {                    
+        if (!runAIProtect())
+        {
+           runAIAttack();
+           cout << "Computer Attacked" << endl;
+           printScreen();
+        }else{
+           cout << "Computer Protected" << endl;
+           printScreen();
+        }    
+        rounds = 4;
+    }
+    
+    //main game loop
+    for (int i=0; i<rounds; i++)
+    {
+        
         cout << "Please enter a number 1-9: " << endl;
         cin >> input::userInput;
         checkInRange();
@@ -374,7 +226,9 @@ int main()
         if (catsEye())
         {
             cout << "No one won the game..." << endl;
-            system("PAUSE");
+            cin.ignore(25, '\n');
+            cout << "Please press the enter key...";
+            cin.get();
             return 0;
          }
          
@@ -382,30 +236,50 @@ int main()
         if (checkWin())
         {
             cout << "You have won the game!" << endl;
-            system("PAUSE");
+            cin.ignore(25, '\n');
+            cout << "Please press the enter key...";
+            cin.get();
             return 0;
         }
         
         
-        
-        if (!runAIProtect())
+        //here we add a function to finsih the game if the requirments are met.
+        if (runAIFinish())
         {
-            runAIAttack();
-            cout << "Computer Attacked" << endl;
-            printScreen();
-        }else{
-            cout << "Computer Protected" << endl;
-            printScreen();
+            if (checkWinComp())
+            {
+                cout << "The computer won, you lost." << endl;
+                printScreen();
+                cin.ignore(25, '\n');
+                cout << "Please press the enter key...";
+                cin.get();
+                return 0;   
+             }                       
         }
+        else
+        {
+            if (!runAIProtect())
+            {
+                runAIAttack();
+                cout << "Computer Attacked" << endl;
+                printScreen();
+            }else{
+                cout << "Computer Protected" << endl;
+                printScreen();
+            }
+        }   
+        
         
         if (checkWinComp())
         {
             cout << "The computer won, you lost." << endl;
-            system("PAUSE");
+            cin.ignore(25, '\n');
+            cout << "Please press the enter key...";
+            cin.get();
             return 0;   
         }
     }
     
     return 0; 
-    //system("PAUSE");
 }
+
